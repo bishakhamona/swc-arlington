@@ -9,8 +9,12 @@ This is an R Markdown document. Markdown is a simple formatting syntax for autho
 
 When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
 
+Compare GDP growth across years in India, China and Niger
+
 ```{r, echo = FALSE}
+
 library("dplyr")
+
 gap.in <- read.table("output/combined_gapMinder.tsv", 
                      sep = "\t", 
                      header = TRUE)
@@ -35,12 +39,14 @@ lifeExp.sum
 
 The mean life expectancy for each continent is summarized above.
 
+The global life expectency has been summarized below.
+
 ```{r, echo = FALSE}
 
 hist(gap.in$lifeExp, main = "Global life expectancy", xlab = "Life expectancy")
 ```
 
-Life expectancy with narrow bid width
+Life expectancy with narrow bid width gives a detailed look at frequency at each age group.
 
 ```{r, echo =FALSE}
 hist(gap.in$lifeExp, main = "Global life expectancy", xlab = "Life expectancy", breaks = 200)
