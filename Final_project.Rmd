@@ -1,0 +1,50 @@
+---
+title: "Gapminder Report"
+author: "Bishakha Mona"
+date: "Sunday, April 19, 2015"
+output: html_document
+---
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r, echo = FALSE}
+library("dplyr")
+gap.in <- read.table("output/combined_gapMinder.tsv", 
+                     sep = "\t", 
+                     header = TRUE)
+india.gdp <- gap.in %>% filter(country == "India") 
+plot(india.gdp$year, india.gdp$gdpPercap, type = "p", main = "GDP growth in India", xlab = "Year", ylab = "GDP")
+
+china.gdp <- gap.in %>% filter(country == "China") 
+plot(china.gdp$year, china.gdp$gdpPercap, type = "p", main = "GDP growth in China", xlab = "Year", ylab = "GDP")
+
+niger.gdp <- gap.in %>% filter(country == "Niger") 
+plot(niger.gdp$year, niger.gdp$gdpPercap, type = "p", main = "GDP growth in Niger", xlab = "Year", ylab = "GDP")
+
+lifeExp.sum <- gap.in %>%
+  select(continent, lifeExp) %>%
+  group_by(continent) %>%
+  summarize(min = min(lifeExp), mean = mean(lifeExp), max = max(lifeExp)) 
+
+lifeExp.sum
+
+
+```
+
+The mean life expectancy for each continent is summarized above.
+
+```{r, echo = FALSE}
+
+hist(gap.in$lifeExp, main = "Global life expectancy", xlab = "Life expectancy")
+```
+
+Life expectancy with narrow bid width
+
+```{r, echo =FALSE}
+hist(gap.in$lifeExp, main = "Global life expectancy", xlab = "Life expectancy", breaks = 200)
+
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
