@@ -39,3 +39,11 @@ mean.pop <- gap.in %>%
   summarize(mean = mean(pop)) 
 
 mean.pop
+
+attach(iris)
+# install.packages("tidyr", dependencies = TRUE)
+library("tidyr")
+
+# Turn iris from wide to long format
+iris.long <- gather(iris, "measurement", "value",1:4)
+
