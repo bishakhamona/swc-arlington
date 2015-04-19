@@ -11,7 +11,7 @@ When you click the **Knit** button a document will be generated that includes bo
 
 Compare GDP growth across years in India, China and Niger
 
-```{r, echo = FALSE}
+```{r, echo = FALSE, message = FALSE}
 
 library("dplyr")
 
