@@ -10,5 +10,32 @@
 library("dplyr")
 
 # Read in data as tab-delimited
-gap.in <- read.table("output/combined_gapMinder.tsv", sep = "\t", header = TRUE)
+gap.in <- read.table("output/combined_gapMinder.tsv", 
+                     sep = "\t", 
+                     header = TRUE)
+gap.in %>%
+  filter(pop > 15000000) %>%
+  select(country, year, pop) %>%
+  group_by(country) %>%
+  summarize(min = min(pop))
 
+gap.in %>%
+  filter(country == "China")
+
+# Challenge - calculate the mean population per continent per year for years prior to 1990
+
+gap.in %>%
+  filter(year < 1990) %>%
+  select(continent, year, pop) %>%
+  group_by(continent,year) %>%
+  summarize(mean = mean(pop)) %>% 
+  as.data.frame()
+
+
+mean.pop <- gap.in %>%
+  filter(year < 1990) %>%
+  select(continent, year, pop) %>%
+  group_by(continent,year) %>%
+  summarize(mean = mean(pop)) 
+
+mean.pop
